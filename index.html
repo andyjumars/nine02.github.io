@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>	商品九宮格relative，JS，absolute佈局-JS4.15</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		#wrap{
+			position:relative;
+		}
+		#wrap .item{
+			width: 248px;
+			height: 360px;
+			font-size: 13px;
+
+		}
+		#wrap .item .title{
+			width: 248px;
+			height: 30px;
+			line-height: 30px;
+			overflow:hidden;
+			margin-bottom: 10px;
+
+		}
+
+		.imgContainer{
+			width: 248px;
+			display: table-cell;
+			text-align: center;
+		}
+		#wrap .item .price{
+			color: #ff6700;
+			font-size:18px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="cols">
+		<button>3列</button>
+		<button>4列</button>
+		<button>5列</button>
+	</div>
+	<div id="wrap">
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_1.jpg" alt="">
+			</div>
+			<p class="title">純色短裙女春秋t卹韓版國新款衣服</p>
+			<p class="price">299元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_2.jpg" alt="">
+			</div>
+			<p class="title">百搭開春裝女胖mm夏季顯瘦2023新款大碼韓版</p>
+			<p class="price">289元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_3.jpg" alt="">
+			</div>
+			<p class="title">婚紗2019新款歐美韓式孕婦婚紗高腰韓版</p>
+			<p class="price">299元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_4.jpg" alt="">
+			</div>
+			<p class="title">點上衣很仙的女裝夏2019新款洋氣打底衣</p>
+			<p class="price">400元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_5.jpg" alt="">
+			</div>
+			<p class="title">大碼女裝胖MM文藝時尚格子圓點顯瘦連衣裙</p>
+			<p class="price">350元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_6.jpg" alt="">
+			</div>
+			<p class="title">2023夏季新款女裝韓版修身顯瘦V領無袖</p>
+			<p class="price">399元</p>
+		</div>
+		<div class="item">
+			<div class="imgContainer">
+				<img src="images/taobao_7.jpg" alt="">
+			</div>
+			<p class="title">春季短款小外套女2023春裝春秋新款韓</p>
+			<p class="price">390元</p>
+			
+		</div>
+		<div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_8.jpg" alt="">
+            </div>
+            <p class="title">大碼女裝中長款針織衫春裝胖mm顯瘦</p>
+            <p class="price">540元</p>
+        </div>
+        <div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_9.jpg" alt="">
+            </div>
+            <p class="title">春款韓版2023新款女裝時尚初春兩件套</p>
+            <p class="price">480元</p>
+        </div>
+        <div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_10.jpg" alt="">
+            </div>
+            <p class="title">牛仔外套裝女短款2023春裝新款女裝韓版</p>
+            <p class="price">289元</p>
+        </div>
+        <div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_11.jpg" alt="">
+            </div>
+            <p class="title">夏季新款女裝裙子純色流蘇a字裙</p>
+            <p class="price">288元</p>
+        </div>
+        <div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_12.jpg" alt="">
+            </div>
+            <p class="title">女裝休閒短袖韓版寬鬆2023新款春夏季</p>
+            <p class="price">250元</p>
+        </div>
+        <div class="item">
+            <div class="imgContainer">
+                <img src="images/taobao_13.jpg" alt="">
+            </div>
+            <p class="title">棉上衣女裝秋季新款2023早春休閒時尚</p>
+            <p class="price">129元</p>
+        </div>
+	</div>
+	<script type="text/javascript">
+		//獲取對應標籤DOM
+		var btns = document.getElementsByTagName('button');
+		var items = document.getElementsByClassName('item');
+
+		
+		//封裝過後的代碼
+
+		btns[0].onclick = function(){
+			//循環
+			mjj_flex(3);
+
+		}
+
+
+		btns[1].onclick = function(){
+			mjj_flex(4);
+		}
+
+		btns[2].onclick = function(){
+			mjj_flex(5);
+		}
+
+
+		function mjj_flex(colsNum){
+			
+			// 第0行第0列   top: row * h         left: col* w
+         // 第0行第1列   top: 0 * h         left: 1* w
+         // 第0行第2列   top: 0 * h         left: 2* w
+         // 第1行第0列   top: 1 * h         left: 0 * w
+         // 第1行第1列   top: 1 * h         left: 1 * w
+         // 第1行第2列   top: 1 * h         left: 2* w
+         // 第2行第0列   top: 2 * h         left: 0* w
+         // 第2行第1列   top: 2 * h         left: 0* w
+         // 第2行第2列   top: 2 * h         left: 0* w
+
+			for(var i = 0; i < items.length; i++){
+
+					//求每個盒子占行數和列數
+
+			var row = parseInt(i / colsNum);
+			var col = parseInt(i % colsNum);
+			
+			//設置盒子定位
+
+			items[i].style.position = 'absolute';
+			items[i].style.top = (row * items[i].offsetHeight) + 'px';
+			items[i].style.left = (col * items[i].offsetWidth) + 'px';
+
+			}
+
+		}
+
+
+
+
+
+
+
+/*
+		//監聽按鈕的點擊
+		btns[0].onclick = function(){
+		var itemW = 248;
+		
+
+		//循環遍歷items，獲取每個資料
+		for(var i = 0; i < items.length; i++){
+			items[i].style.float = 'left';
+			//console.log(items[i].offsetWidth);
+			//items[i].parentNode.style.width = (3*itemW) + 'px';
+			items[i].parentNode.style.width = (3 * items[i].offsetWidth )+ 'px';
+		}										//offsetWidth，獲取當前盒子寬度
+												//offsetHeight，獲取當前盒子高度			
+	
+		}													
+		//顯示4列按鈕				
+		btns[1].onclick = function(){
+			var itemW = 248;
+
+			for(var i =0; i < items.length; i++){
+				items[i].style.float = 'left';
+				//console.log(items[i].offsetWidth);
+				items[i].parentNode.style.width = (4 * items[i].offsetWidth) + 'px';
+			}
+		}
+
+		//顯示5列按鈕
+		btns[2].onclick = function(){
+			var itemW = 248;
+
+			for(var i =0; i < items.length; i++){
+				items[i].style.float = 'left';
+
+				items[i].parentNode.style.width = (5 * items[i].offsetWidth) + 'px';
+			}
+		}				
+		*/
+	</script>
+</body>
+</html>
